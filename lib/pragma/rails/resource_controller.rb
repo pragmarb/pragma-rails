@@ -5,6 +5,7 @@ module Pragma
     # @author Alessandro Desantis
     module ResourceController
       def self.included(klass)
+        klass.include Controller
         klass.extend ClassMethods
         klass.include InstanceMethods
       end
