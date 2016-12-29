@@ -5,7 +5,7 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/pragmarb/pragma-rails.svg?maxAge=3600&style=flat-square)](https://codeclimate.com/github/pragmarb/pragma-rails)
 [![Coveralls](https://img.shields.io/coveralls/pragmarb/pragma-rails.svg?maxAge=3600&style=flat-square)](https://coveralls.io/github/pragmarb/pragma-rails)
 
-Ruby on Rails integration for the [Pragma](https://github.com/pragmarb/pragma) architecture.
+This gem provides Ruby on Rails integration for the [Pragma](https://github.com/pragmarb/pragma) architecture.
 
 ## Installation
 
