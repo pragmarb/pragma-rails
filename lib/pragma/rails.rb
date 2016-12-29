@@ -1,7 +1,10 @@
-require "pragma/rails/version"
+# frozen_string_literal: true
+require 'pragma/rails/version'
 
 module Pragma
+  # Ruby on Rails integration for the Pragma architecture.
+  #
+  # @author Alessandro Desantis
   module Rails
-    # Your code goes here...
   end
 end
