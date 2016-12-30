@@ -24,7 +24,11 @@ module Pragma
             response.headers[key] = value
           end
 
-          render status: result.status, json: result.resource.to_hash
+          if result.resource
+            render status: result.status, json: result.resource.to_hash
+          else
+            head result.status
+          end
         end
 
         protected
