@@ -1,4 +1,7 @@
+# frozen_string_literal: true
 RSpec.describe Pragma::Rails::Controller do
+  subject { controller_klass.new.tap(&:run_operation) }
+
   let(:controller_klass) do
     Class.new do
       OPERATION_KLASS = Class.new(Pragma::Operation::Base) do
@@ -29,12 +32,6 @@ RSpec.describe Pragma::Rails::Controller do
       end
     end.tap do |klass|
       klass.include described_class
-    end
-  end
-
-  subject do
-    controller_klass.new.tap do |controller|
-      controller.run_operation
     end
   end
 

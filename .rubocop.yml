@@ -85,3 +85,9 @@ Metrics/CyclomaticComplexity:
 
 Metrics/ClassLength:
   Enabled: false
+
+RSpec/MessageExpectation:
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false

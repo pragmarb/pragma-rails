@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Pragma
   module Rails
     # This mixin should be included in a Rails controller to provide integration with Pragma

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Pragma
   module Rails
     # Exposes CRUD operations on a resource through a Rails controller.
@@ -25,9 +26,9 @@ module Pragma
         # @example
         #   API::V1::PostsController.operation_klass(:create) => 'API::V1::Post::Operation::Create'
         def operation_klass(operation_name)
-          [self.class.name.deconstantize].tap do |klass|
-            klass << self.class.name.demodulize.chomp('Controller').singularize
-            klass << "Operation::#{action_name.camelize}"
+          [name.deconstantize].tap do |klass|
+            klass << name.demodulize.chomp('Controller').singularize
+            klass << "Operation::#{operation_name.to_s.camelize}"
           end.join('::')
         end
 

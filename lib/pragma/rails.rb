@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'pragma'
+require 'rails'
 
 require 'pragma/rails/version'
 require 'pragma/rails/controller'
