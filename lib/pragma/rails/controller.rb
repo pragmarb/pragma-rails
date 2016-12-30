@@ -13,9 +13,9 @@ module Pragma
       module InstanceMethods # :nodoc:
         # Runs an operation, then responds with the returned status code, headers and resource.
         #
-        # @param operation_klass [Class] a subclass of +Pragma::Operation::Base+
+        # @param operation_klass [Class|String] a subclass of +Pragma::Operation::Base+
         def run(operation_klass)
-          result = operation_klass.call(
+          result = operation_klass.to_s.constantize.call(
             params: operation_params,
             current_user: operation_user
           )
