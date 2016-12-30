@@ -20,8 +20,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'pragma', '~> 0.1.0'
-  spec.add_dependency 'rails', '>= 4.2.0', '< 6'
+  spec.add_dependency 'pragma', '~> 0.1'
+  spec.add_dependency 'rails', '>= 4.2', '< 6'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
