@@ -16,7 +16,7 @@ module Pragma
         # @param operation_klass [Class|String] a subclass of +Pragma::Operation::Base+
         def run(operation_klass)
           result = operation_klass.to_s.constantize.call(
-            params: operation_params.to_h,
+            params: operation_params.to_unsafe_h,
             current_user: operation_user
           )
 
