@@ -25,6 +25,10 @@ RSpec.describe Pragma::Rails::Controller do
         @render_args = args
       end
 
+      def params
+        {}
+      end
+
       protected
 
       def operation_params
@@ -44,6 +48,6 @@ RSpec.describe Pragma::Rails::Controller do
   end
 
   it 'responds with the resource from the operation' do
-    expect(subject.render_args.first[:json]).to eq(foo: 'bar')
+    expect(JSON.parse(subject.render_args.first[:json])).to eq('foo' => 'bar')
   end
 end
