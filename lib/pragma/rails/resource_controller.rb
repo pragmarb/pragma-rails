@@ -46,7 +46,8 @@ module Pragma
         def class_exists?(klass)
           Object.const_get(klass)
           true
-        rescue NameError
+        rescue NameError => e
+          raise e unless e.message.include?("uninitialized constant #{klass}")
           false
         end
       end
