@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require 'action_controller'
+
 RSpec.describe Pragma::Rails::Controller do
   subject { controller_klass.new.tap(&:run_operation) }
 
@@ -32,7 +34,7 @@ RSpec.describe Pragma::Rails::Controller do
       protected
 
       def operation_params
-        { foo: 'bar' }
+        ActionController::Parameters.new(foo: 'bar')
       end
     end.tap do |klass|
       klass.include described_class
