@@ -12,6 +12,16 @@ module Pragma
       end
 
       module ClassMethods # :nodoc:
+        # Returns the name of the resource this controller refers to.
+        #
+        # @return [String]
+        #
+        # @example
+        #   API::V1::PostsController.resource_name => 'Post'
+        def resource_name
+          name.demodulize.chomp('Controller').singularize
+        end
+
         # Returns the expected class of the provided operation on this resource.
         #
         # Note that this does not mean the operation is actually supported. Use {#operation?} for
@@ -27,8 +37,7 @@ module Pragma
         #   API::V1::PostsController.operation_klass(:create) => 'API::V1::Post::Operation::Create'
         def operation_klass(operation_name)
           [name.deconstantize].tap do |klass|
-            klass << name.demodulize.chomp('Controller').singularize
-            klass << "Operation::#{operation_name.to_s.camelize}"
+            klass << "#{resource_name}::Operation::#{operation_name.to_s.camelize}"
           end.join('::')
         end
 
