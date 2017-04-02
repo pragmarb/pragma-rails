@@ -34,7 +34,8 @@ module Pragma
             render(
               status: result['result.response'].status,
               json: result['result.response'].entity.to_json(user_options: {
-                expand: params[:expand]
+                expand: params[:expand],
+                current_user: operation_user
               })
             )
           else
