@@ -15,21 +15,30 @@ module Pragma
         #
         # @param operation_klass [Class|String] a subclass of +Pragma::Operation::Base+
         def run(operation_klass)
-          result = operation_klass.to_s.constantize.call(
-            params: operation_params.to_unsafe_h,
-            current_user: operation_user
+          operation_const = if operation_klass.is_a?(Class)
+            operation_klass
+          else
+            operation_klass.to_s.constantize
+          end
+
+          result = operation_const.(
+            operation_params,
+            { 'current_user' => operation_user }
           )
 
-          result.headers.each_pair do |key, value|
+          result['result.response'].headers.each_pair do |key, value|
             response.headers[key] = value
           end
 
-          if result.resource
-            render status: result.status, json: result.resource.to_json(user_options: {
-              expand: params[:expand]
-            })
+          if result['result.response'].entity
+            render(
+              status: result['result.response'].status,
+              json: result['result.response'].entity.to_json(user_options: {
+                expand: params[:expand]
+              })
+            )
           else
-            head result.status
+            head result['result.response'].status
           end
         end
 
@@ -41,7 +50,7 @@ module Pragma
         #
         # @return [Hash]
         def operation_params
-          params
+          params.to_unsafe_h
         end
 
         # Returns the currently authenticated user (for policies).
