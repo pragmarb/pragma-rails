@@ -12,6 +12,7 @@ AllCops:
    - 'spec/spec_helper.rb'
    - 'spec/rails_helper.rb'
    - 'spec/support/**/*'
+   - 'spec/dummy/**/*'
    - 'config/**/*'
    - '**/Rakefile'
    - '**/Gemfile'
@@ -53,7 +54,7 @@ Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
 
 Lint/EndAlignment:
-  AlignWith: variable
+  EnforcedStyleAlignWith: variable
   AutoCorrect: true
 
 Style/AndOr:
