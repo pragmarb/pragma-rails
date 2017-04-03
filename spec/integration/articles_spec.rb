@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-RSpec.describe '/api/v1/categories' do
+RSpec.describe '/api/v1/articles' do
   describe 'GET /' do
-    subject { -> { get api_v1_categories_path } }
+    subject { -> { get api_v1_articles_path } }
 
-    let!(:category) { FactoryGirl.create(:category) }
+    let!(:article) { FactoryGirl.create(:article) }
 
-    it 'returns the categories' do
+    it 'returns the articles' do
       subject.call
       expect(parsed_response).to match_array([
-        a_hash_including('id' => category.id)
+        a_hash_including('id' => article.id)
       ])
     end
 
@@ -24,14 +24,14 @@ RSpec.describe '/api/v1/categories' do
   end
 
   describe 'GET /:id' do
-    subject { -> { get api_v1_category_path(category) } }
+    subject { -> { get api_v1_article_path(article) } }
 
-    let(:category) { FactoryGirl.create(:category) }
+    let(:article) { FactoryGirl.create(:article) }
 
-    it 'returns the category' do
+    it 'returns the article' do
       subject.call
       expect(parsed_response).to match(a_hash_including(
-        'id' => category.id
+        'id' => article.id
       ))
     end
   end
