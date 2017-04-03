@@ -6,6 +6,11 @@ RSpec.describe '/api/v1/categories' do
 
     let!(:category) { FactoryGirl.create(:category) }
 
+    it 'responds with 200 OK' do
+      subject.call
+      expect(last_response.status).to eq(200)
+    end
+
     it 'returns the categories' do
       subject.call
       expect(parsed_response).to match_array([
@@ -27,6 +32,11 @@ RSpec.describe '/api/v1/categories' do
     subject { -> { get api_v1_category_path(category) } }
 
     let(:category) { FactoryGirl.create(:category) }
+
+    it 'responds with 200 OK' do
+      subject.call
+      expect(last_response.status).to eq(200)
+    end
 
     it 'returns the category' do
       subject.call

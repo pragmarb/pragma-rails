@@ -8,13 +8,13 @@ module API
           property :body, type: coercible(:string)
 
           validation do
-            required(:category).filled(:str?)
+            required(:category).filled
             required(:title).filled(:str?)
             required(:body).filled(:str?)
           end
 
           def category=(val)
-            super ::Category.find_by(val)
+            super ::Category.find_by(id: val)
           end
         end
       end
