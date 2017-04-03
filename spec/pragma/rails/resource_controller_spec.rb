@@ -1,8 +1,9 @@
 # frozen_string_literal: true
+
 RSpec.describe Pragma::Rails::ResourceController do
   subject { controller_klass.new }
 
-  before(:all) do
+  before do
     module API
       module V1
         module Post

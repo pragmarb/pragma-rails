@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Pragma
   module Rails
     # This mixin should be included in a Rails controller to provide integration with Pragma
@@ -21,9 +22,9 @@ module Pragma
             operation_klass.to_s.constantize
           end
 
-          result = operation_const.(
+          result = operation_const.call(
             operation_params,
-            { 'current_user' => operation_user }
+            'current_user' => operation_user
           )
 
           result['result.response'].headers.each_pair do |key, value|

@@ -25,6 +25,10 @@ Style/BlockDelimiters:
   Exclude:
     - 'spec/**/*'
 
+Style/FileName:
+  Exclude:
+    - 'pragma-rails.gemspec'
+
 Style/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
@@ -85,6 +89,9 @@ Metrics/CyclomaticComplexity:
   Enabled: false
 
 Metrics/ClassLength:
+  Enabled: false
+
+Metrics/BlockLength:
   Enabled: false
 
 RSpec/MessageExpectation:

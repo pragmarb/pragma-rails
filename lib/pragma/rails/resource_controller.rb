@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Pragma
   module Rails
     # Exposes CRUD operations on a resource through a Rails controller.
