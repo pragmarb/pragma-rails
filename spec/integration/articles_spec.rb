@@ -28,6 +28,21 @@ RSpec.describe '/api/v1/articles' do
       ))
     end
 
+    context 'with the expand parameter' do
+      let(:params) do
+        { expand: ['category'] }
+      end
+
+      it 'expands the associations' do
+        subject.call
+        expect(parsed_response).to match_array([
+          a_hash_including(
+            'category' => a_hash_including('id' => article.category_id)
+          )
+        ])
+      end
+    end
+
     context 'when pagination info is provided' do
       let(:params) do
         { page: 2, per_page: 1 }
@@ -37,7 +52,6 @@ RSpec.describe '/api/v1/articles' do
 
       it 'returns the articles from the given page' do
         subject.call
-        binding.pry
         expect(parsed_response).to match_array([
           a_hash_including('id' => article2.id)
         ])
@@ -53,7 +67,7 @@ RSpec.describe '/api/v1/articles' do
       end
     end
 
-    context 'with invalid pagination params' do
+    context 'with an invalid page parameter' do
       let(:params) do
         { page: 0 }
       end
@@ -64,7 +78,18 @@ RSpec.describe '/api/v1/articles' do
       end
     end
 
-    context 'with invalid expand params' do
+    context 'with an invalid per_page parameter' do
+      let(:params) do
+        { per_page: 150 }
+      end
+
+      it 'responds with 422 Unprocessable Entity' do
+        subject.call
+        expect(last_response.status).to eq(422)
+      end
+    end
+
+    context 'with an invalid expand parameter' do
       let(:params) do
         { expand: 'foo' }
       end
@@ -77,9 +102,10 @@ RSpec.describe '/api/v1/articles' do
   end
 
   describe 'GET /:id' do
-    subject { -> { get api_v1_article_path(article) } }
+    subject { -> { get api_v1_article_path(article, params) } }
 
     let(:article) { FactoryGirl.create(:article) }
+    let(:params) { {} }
 
     it 'responds with 200 OK' do
       subject.call
@@ -92,16 +118,31 @@ RSpec.describe '/api/v1/articles' do
         'id' => article.id
       ))
     end
+
+    context 'with the expand parameter' do
+      let(:params) do
+        { expand: ['category'] }
+      end
+
+      it 'expands the associations' do
+        subject.call
+        expect(parsed_response).to match(a_hash_including(
+          'category' => a_hash_including('id' => article.category_id)
+        ))
+      end
+    end
   end
 
   describe 'POST /' do
-    subject { -> { post api_v1_articles_path, article.to_json } }
+    subject { -> { post api_v1_articles_path(params), article.to_json } }
 
     let(:article) do
       FactoryGirl.attributes_for(:article).tap do |a|
         a[:category] = FactoryGirl.create(:category).id
       end
     end
+
+    let(:params) { {} }
 
     it 'responds with 201 Created' do
       subject.call
@@ -118,12 +159,26 @@ RSpec.describe '/api/v1/articles' do
     it 'creates the article' do
       expect(subject).to change(Article, :count).by(1)
     end
+
+    context 'with the expand parameter' do
+      let(:params) do
+        { expand: ['category'] }
+      end
+
+      it 'expands the associations' do
+        subject.call
+        expect(parsed_response).to match(a_hash_including(
+          'category' => a_hash_including('id' => article[:category])
+        ))
+      end
+    end
   end
 
   describe 'PATCH /:id' do
-    subject { -> { patch api_v1_article_path(article), new_article.to_json } }
+    subject { -> { patch api_v1_article_path(article, params), new_article.to_json } }
 
     let(:article) { FactoryGirl.create(:article) }
+    let(:params) { {} }
 
     let(:new_article) do
       {
@@ -145,6 +200,19 @@ RSpec.describe '/api/v1/articles' do
 
     it 'updates the article' do
       expect(subject).to change { article.reload.title }.to(new_article[:title])
+    end
+
+    context 'with the expand parameter' do
+      let(:params) do
+        { expand: ['category'] }
+      end
+
+      it 'expands the associations' do
+        subject.call
+        expect(parsed_response).to match(a_hash_including(
+          'category' => a_hash_including('id' => article.category_id)
+        ))
+      end
     end
   end
 
