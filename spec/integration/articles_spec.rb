@@ -2,8 +2,9 @@
 
 RSpec.describe '/api/v1/articles' do
   describe 'GET /' do
-    subject { -> { get api_v1_articles_path } }
+    subject { -> { get api_v1_articles_path(params) } }
 
+    let(:params) { {} }
     let!(:article) { FactoryGirl.create(:article) }
 
     it 'responds with 200 OK' do
@@ -25,6 +26,53 @@ RSpec.describe '/api/v1/articles' do
         'Per-Page' => 30,
         'Page' => 1
       ))
+    end
+
+    context 'when pagination info is provided' do
+      let(:params) do
+        { page: 2, per_page: 1 }
+      end
+
+      let!(:article2) { FactoryGirl.create(:article) }
+
+      it 'returns the articles from the given page' do
+        subject.call
+        binding.pry
+        expect(parsed_response).to match_array([
+          a_hash_including('id' => article2.id)
+        ])
+      end
+
+      it 'adds the expected pagination info to the headers' do
+        subject.call
+        expect(last_response.headers).to match(a_hash_including(
+          'Total' => 2,
+          'Per-Page' => 1,
+          'Page' => 2
+        ))
+      end
+    end
+
+    context 'with invalid pagination params' do
+      let(:params) do
+        { page: 0 }
+      end
+
+      it 'responds with 422 Unprocessable Entity' do
+        subject.call
+        expect(last_response.status).to eq(422)
+      end
+    end
+
+    context 'with invalid expand params' do
+      let(:params) do
+        { expand: 'foo' }
+      end
+
+      it 'responds with 422 Unprocessable Entity' do
+        subject.call
+        expect(last_response.status).to eq(422)
+      end
     end
   end
 
