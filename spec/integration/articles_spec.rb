@@ -119,6 +119,17 @@ RSpec.describe '/api/v1/articles' do
       ))
     end
 
+    context 'with an invalid expand parameter' do
+      let(:params) do
+        { expand: 'foo' }
+      end
+
+      it 'responds with 422 Unprocessable Entity' do
+        subject.call
+        expect(last_response.status).to eq(422)
+      end
+    end
+
     context 'with the expand parameter' do
       let(:params) do
         { expand: ['category'] }
@@ -158,6 +169,17 @@ RSpec.describe '/api/v1/articles' do
 
     it 'creates the article' do
       expect(subject).to change(Article, :count).by(1)
+    end
+
+    context 'with an invalid expand parameter' do
+      let(:params) do
+        { expand: 'foo' }
+      end
+
+      it 'responds with 422 Unprocessable Entity' do
+        subject.call
+        expect(last_response.status).to eq(422)
+      end
     end
 
     context 'with the expand parameter' do
@@ -200,6 +222,17 @@ RSpec.describe '/api/v1/articles' do
 
     it 'updates the article' do
       expect(subject).to change { article.reload.title }.to(new_article[:title])
+    end
+
+    context 'with an invalid expand parameter' do
+      let(:params) do
+        { expand: 'foo' }
+      end
+
+      it 'responds with 422 Unprocessable Entity' do
+        subject.call
+        expect(last_response.status).to eq(422)
+      end
     end
 
     context 'with the expand parameter' do
