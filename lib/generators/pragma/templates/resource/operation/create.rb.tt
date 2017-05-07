@@ -1,0 +1,10 @@
+module API
+  module V<%= options['version'] %>
+    module Operation
+      module <%= file_name.camelcase %>
+        class Create < Pragma::Operation::Create
+        end
+      end
+    end
+  end
+end
