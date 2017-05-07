@@ -57,7 +57,7 @@ module Pragma
           begin
             klass.constantize
           rescue NameError => e
-            raise e unless e.message.include?("uninitialized constant #{klass}")
+            raise e unless e.message.end_with?("uninitialized constant #{klass}")
           end
 
           Object.const_defined?(klass)
