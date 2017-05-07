@@ -29,7 +29,7 @@ RSpec.describe '/api/v1/articles' do
   end
 
   describe 'GET /:id' do
-    subject { -> { get api_v1_article_path(article) } }
+    subject { -> { get api_v1_article_path(article, expand: ['category']) } }
 
     let(:article) { FactoryGirl.create(:article) }
 
@@ -42,6 +42,15 @@ RSpec.describe '/api/v1/articles' do
       subject.call
       expect(parsed_response).to match(a_hash_including(
         'id' => article.id
+      ))
+    end
+
+    it 'expands associations' do
+      subject.call
+      expect(parsed_response).to match(a_hash_including(
+        'category' => a_hash_including(
+          'id' => article.category.id
+        )
       ))
     end
   end

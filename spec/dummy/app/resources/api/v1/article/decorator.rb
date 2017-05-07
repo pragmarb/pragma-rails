@@ -9,6 +9,7 @@ module API
         property :id
         property :title
         property :body
+        belongs_to :category, decorator: API::V1::Category::Decorator
         timestamp :created_at
         timestamp :updated_at
       end
