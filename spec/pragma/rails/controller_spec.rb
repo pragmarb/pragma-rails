@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'action_controller'
 
 RSpec.describe Pragma::Rails::Controller do
@@ -6,17 +7,21 @@ RSpec.describe Pragma::Rails::Controller do
 
   let(:controller_klass) do
     Class.new do
-      OPERATION_KLASS = Class.new(Pragma::Operation::Base) do
-        def call
-          headers['X-Foo'] = params[:foo]
-          respond_with status: :created, resource: { foo: params[:foo] }
-        end
-      end
-
       attr_reader :render_args
 
       def run_operation
-        run OPERATION_KLASS
+        operation = Class.new(Pragma::Operation::Base) do
+          step :respond!
+
+          def respond!(options, params:, **)
+            options['result.response'] = Pragma::Operation::Response::Created.new(
+                headers: { 'X-Foo' => params[:foo] },
+                entity: { foo: params[:foo] }
+            )
+          end
+        end
+
+        run operation
       end
 
       def response
@@ -46,7 +51,7 @@ RSpec.describe Pragma::Rails::Controller do
   end
 
   it 'responds with the status code from the operation' do
-    expect(subject.render_args.first[:status]).to eq(:created)
+    expect(subject.render_args.first[:status]).to eq(201)
   end
 
   it 'responds with the resource from the operation' do

@@ -12,6 +12,7 @@ AllCops:
    - 'spec/spec_helper.rb'
    - 'spec/rails_helper.rb'
    - 'spec/support/**/*'
+   - 'spec/dummy/**/*'
    - 'config/**/*'
    - '**/Rakefile'
    - '**/Gemfile'
@@ -23,6 +24,10 @@ RSpec/DescribeClass:
 Style/BlockDelimiters:
   Exclude:
     - 'spec/**/*'
+
+Style/FileName:
+  Exclude:
+    - 'pragma-rails.gemspec'
 
 Style/AlignParameters:
   EnforcedStyle: with_fixed_indentation
@@ -53,7 +58,7 @@ Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
 
 Lint/EndAlignment:
-  AlignWith: variable
+  EnforcedStyleAlignWith: variable
   AutoCorrect: true
 
 Style/AndOr:
@@ -84,6 +89,9 @@ Metrics/CyclomaticComplexity:
   Enabled: false
 
 Metrics/ClassLength:
+  Enabled: false
+
+Metrics/BlockLength:
   Enabled: false
 
 RSpec/MessageExpectation:

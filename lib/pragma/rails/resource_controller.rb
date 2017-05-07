@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Pragma
   module Rails
     # Exposes CRUD operations on a resource through a Rails controller.
@@ -54,9 +55,9 @@ module Pragma
 
         def class_exists?(klass)
           begin
-            klass.constantize
+            Object.const_get(klass)
           rescue NameError => e
-            raise e unless e.message.include?("uninitialized constant #{klass}")
+            raise e unless e.message.end_with?("uninitialized constant #{klass}")
           end
 
           Object.const_defined?(klass)

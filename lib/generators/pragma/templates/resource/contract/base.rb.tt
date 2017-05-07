@@ -1,0 +1,10 @@
+module API
+  module V<%= options['version'] %>
+    module Contract
+      module <%= file_name.camelcase %>
+        class Base < Pragma::Contract::Base
+        end
+      end
+    end
+  end
+end
