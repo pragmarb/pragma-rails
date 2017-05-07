@@ -53,6 +53,22 @@ RSpec.describe '/api/v1/articles' do
         )
       ))
     end
+
+    describe 'expanding a non-existing association' do
+      subject { -> { get api_v1_article_path(article, expand: ['foo']) } }
+
+      it 'responds with 400 Bad Request' do
+        subject.call
+        expect(last_response.status).to eq(400)
+      end
+
+      it 'responds with an error entity' do
+        subject.call
+        expect(parsed_response).to match(a_hash_including(
+          'error_type' => 'expansion_error'
+        ))
+      end
+    end
   end
 
   describe 'POST /' do
