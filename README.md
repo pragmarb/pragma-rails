@@ -37,33 +37,33 @@ This gem provides a `pragma:resource` generator for creating a new resource with
 operations:
 
 ```console
-$ rails g pragma:resource post
-      create  app/resources/api/v1/post
-      create  app/resources/api/v1/post/contract/base.rb
-      create  app/resources/api/v1/post/contract/create.rb
-      create  app/resources/api/v1/post/contract/update.rb
-      create  app/resources/api/v1/post/decorator.rb
-      create  app/resources/api/v1/post/operation/create.rb
-      create  app/resources/api/v1/post/operation/destroy.rb
-      create  app/resources/api/v1/post/operation/index.rb
-      create  app/resources/api/v1/post/operation/update.rb
-      create  app/resources/api/v1/post/policy.rb
+$ rails g pragma:resource article
+      create  app/resources/api/v1/article
+      create  app/resources/api/v1/article/contract/base.rb
+      create  app/resources/api/v1/article/contract/create.rb
+      create  app/resources/api/v1/article/contract/update.rb
+      create  app/resources/api/v1/article/decorator.rb
+      create  app/resources/api/v1/article/operation/create.rb
+      create  app/resources/api/v1/article/operation/destroy.rb
+      create  app/resources/api/v1/article/operation/index.rb
+      create  app/resources/api/v1/article/operation/update.rb
+      create  app/resources/api/v1/article/policy.rb
 ```
 
 You can also specify an API version (the default is 1):
 
 ```console
-$ rails g pragma:resource post -v 2
-      create  app/resources/api/v2/post
-      create  app/resources/api/v2/post/contract/base.rb
-      create  app/resources/api/v2/post/contract/create.rb
-      create  app/resources/api/v2/post/contract/update.rb
-      create  app/resources/api/v2/post/decorator.rb
-      create  app/resources/api/v2/post/operation/create.rb
-      create  app/resources/api/v2/post/operation/destroy.rb
-      create  app/resources/api/v2/post/operation/index.rb
-      create  app/resources/api/v2/post/operation/update.rb
-      create  app/resources/api/v2/post/policy.rb
+$ rails g pragma:resource article -v 2
+      create  app/resources/api/v2/article
+      create  app/resources/api/v2/article/contract/base.rb
+      create  app/resources/api/v2/article/contract/create.rb
+      create  app/resources/api/v2/article/contract/update.rb
+      create  app/resources/api/v2/article/decorator.rb
+      create  app/resources/api/v2/article/operation/create.rb
+      create  app/resources/api/v2/article/operation/destroy.rb
+      create  app/resources/api/v2/article/operation/index.rb
+      create  app/resources/api/v2/article/operation/update.rb
+      create  app/resources/api/v2/article/policy.rb
 ```
 
 ### Basic controllers
@@ -74,18 +74,18 @@ your controller to run the provided Pragma operation:
 ```ruby
 module API
   module V1
-    class PostsController < ApplicationController
+    class ArticlesController < ApplicationController
       include Pragma::Rails::Controller
 
       def create
-        run API::V1::Post::Operation::Create
+        run API::V1::Article::Operation::Create
       end
     end
   end
 end
 ```
 
-In the example above, `PostsController#create` will run the `API::V1::Post::Operation::Create`
+In the example above, `ArticlesController#create` will run the `API::V1::Article::Operation::Create`
 operation and respond with the status code, headers and resource output by the operation.
 
 By default, the `#params` method will be used as the operation's parameters and `#current_user`, if
@@ -95,11 +95,11 @@ available, will be used as the operation's user. You can override these defaults
 ```ruby
 module API
   module V1
-    class PostsController < ApplicationController
+    class ArticlesController < ApplicationController
       include Pragma::Rails::Controller
 
       def create
-        run API::V1::Post::Operation::Create
+        run API::V1::Article::Operation::Create
       end
 
       private
@@ -127,7 +127,7 @@ above could be rewritten as:
 ```ruby
 module API
   module V1
-    class PostsController < ApplicationController
+    class ArticlesController < ApplicationController
       include Pragma::Rails::ResourceController
     end
   end
@@ -136,8 +136,8 @@ end
 
 You will still have to define a route to your `#create` action, of course, but you don't have to
 write the action anymore! This works with any actions, not only the default CRUD actions defined
-by Rails. So, for instance, if you have an `API::V1::Post::Operation::Publish` operation, a
-`#publish` action will be accessible in the `API::V1::PostsController` controller.
+by Rails. So, for instance, if you have an `API::V1::Article::Operation::Publish` operation, a
+`#publish` action will be accessible in the `API::V1::ArticlesController` controller.
 
 Note that `Pragma::Rails::Controller` is included automatically when including
 `Pragma::Rails::ResourceController`.
