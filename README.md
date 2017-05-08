@@ -27,7 +27,9 @@ Or install it yourself as:
 $ gem install pragma-rails
 ```
 
-## Generators
+## Usage
+
+### Generators
 
 This gem provides a `pragma:resource` generator for creating a new resource with the default CRUD
 operations:
@@ -62,7 +64,7 @@ $ rails g pragma:resource article -v 2
       create  app/resources/api/v2/article/policy.rb
 ```
 
-## Controllers
+### Controllers
 
 `Pragma::Rails::Controller` gives your controller the ability to run Pragma operations:
 
@@ -111,7 +113,7 @@ module API
 end
 ```
 
-## Resource Controllers
+### Resource Controllers
 
 Resource controllers (provided by the `Pragma::Rails::ResourceController` module) abstract even more 
 of the logic behind your controllers by inferring the operations supported by a resource and 
