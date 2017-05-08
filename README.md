@@ -27,11 +27,7 @@ Or install it yourself as:
 $ gem install pragma-rails
 ```
 
-## Usage
-
-The gem provides two modules which you can include in your controllers to integrate with Pragma.
-
-### Resource generator
+## Generators
 
 This gem provides a `pragma:resource` generator for creating a new resource with the default CRUD
 operations:
@@ -66,10 +62,9 @@ $ rails g pragma:resource article -v 2
       create  app/resources/api/v2/article/policy.rb
 ```
 
-### Basic controllers
+## Controllers
 
-The first module is `Pragma::Rails::Controller`. It gives you a `#run` method which you can call in
-your controller to run the provided Pragma operation:
+`Pragma::Rails::Controller` gives your controller the ability to run Pragma operations:
 
 ```ruby
 module API
@@ -86,7 +81,7 @@ end
 ```
 
 In the example above, `ArticlesController#create` will run the `API::V1::Article::Operation::Create`
-operation and respond with the status code, headers and resource output by the operation.
+operation and respond with the status code, headers and resource returned by the operation.
 
 By default, the `#params` method will be used as the operation's parameters and `#current_user`, if
 available, will be used as the operation's user. You can override these defaults by overriding the
@@ -116,13 +111,13 @@ module API
 end
 ```
 
-### Resource controllers
+## Resource Controllers
 
-Resource controllers abstract even more of the logic behind your controllers by inferring the
-operations supported by a resource and automagically providing controller actions that run them.
+Resource controllers (provided by the `Pragma::Rails::ResourceController` module) abstract even more 
+of the logic behind your controllers by inferring the operations supported by a resource and 
+automatically providing controller actions that run them.
 
-Provided that the name of the controller and the name of the operation stay the same, the example
-above could be rewritten as:
+With a resource controller, the example above could be rewritten as:
 
 ```ruby
 module API
@@ -145,12 +140,11 @@ end
 ```
 
 You will still have to define a route to your `#create` action, of course, but you don't have to
-write the action anymore! This works with any actions, not only the default CRUD actions defined
-by Rails. So, for instance, if you have an `API::V1::Article::Operation::Publish` operation, a
-`#publish` action will be accessible in the `API::V1::ArticlesController` controller.
+write the action anymore!
 
-Note that `Pragma::Rails::Controller` is included automatically when including
-`Pragma::Rails::ResourceController`.
+This works with any actions, not only the default CRUD actions defined by Rails. So, for instance, 
+if you have an `API::V1::Article::Operation::Publish` operation, a `#publish` action will be 
+accessible in the `API::V1::ArticlesController` controller.
 
 ## Contributing
 
