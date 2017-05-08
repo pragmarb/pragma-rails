@@ -129,6 +129,16 @@ module API
   module V1
     class ArticlesController < ApplicationController
       include Pragma::Rails::ResourceController
+
+      private
+
+      def operation_params
+        params.merge(my_additional: 'param')
+      end
+
+      def operation_user
+        User.authenticate_from params
+      end
     end
   end
 end
