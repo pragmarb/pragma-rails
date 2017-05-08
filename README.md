@@ -31,6 +31,41 @@ $ gem install pragma-rails
 
 The gem provides two modules which you can include in your controllers to integrate with Pragma.
 
+### Resource generator
+
+This gem provides a `pragma:resource` generator for creating a new resource with the default CRUD
+operations:
+
+```console
+$ rails g pragma:resource post
+      create  app/resources/api/v1/post
+      create  app/resources/api/v1/post/contract/base.rb
+      create  app/resources/api/v1/post/contract/create.rb
+      create  app/resources/api/v1/post/contract/update.rb
+      create  app/resources/api/v1/post/decorator.rb
+      create  app/resources/api/v1/post/operation/create.rb
+      create  app/resources/api/v1/post/operation/destroy.rb
+      create  app/resources/api/v1/post/operation/index.rb
+      create  app/resources/api/v1/post/operation/update.rb
+      create  app/resources/api/v1/post/policy.rb
+```
+
+You can also specify an API version (the default is 1):
+
+```console
+$ rails g pragma:resource post -v 2
+      create  app/resources/api/v2/post
+      create  app/resources/api/v2/post/contract/base.rb
+      create  app/resources/api/v2/post/contract/create.rb
+      create  app/resources/api/v2/post/contract/update.rb
+      create  app/resources/api/v2/post/decorator.rb
+      create  app/resources/api/v2/post/operation/create.rb
+      create  app/resources/api/v2/post/operation/destroy.rb
+      create  app/resources/api/v2/post/operation/index.rb
+      create  app/resources/api/v2/post/operation/update.rb
+      create  app/resources/api/v2/post/policy.rb
+```
+
 ### Basic controllers
 
 The first module is `Pragma::Rails::Controller`. It gives you a `#run` method which you can call in
