@@ -1,7 +1,7 @@
 module API
   module V<%= options['version'] %>
-    module Contract
-      module <%= file_name.camelcase %>
+    module <%= file_name.camelcase %>
+      module Contract
         class Base < Pragma::Contract::Base
         end
       end
