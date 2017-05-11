@@ -1,4 +1,4 @@
-RSpec.describe '/api/v1/<%= file_name.tr('_', '-') %>' do
+RSpec.describe '/api/v1/<%= file_name.pluralize.tr('_', '-') %>' do
   describe 'GET /' do
     subject { -> { get api_v1_<%= file_name.pluralize %>_path } }
 
