@@ -1,0 +1,6 @@
+module API
+  module V<%= options['version'] %>
+    class <%= file_name.pluralize.camelcase %>Controller < ResourceController
+    end
+  end
+end
