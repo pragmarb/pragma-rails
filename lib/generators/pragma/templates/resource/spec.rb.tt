@@ -1,0 +1,99 @@
+RSpec.describe '/api/v1/<%= file_name.tr('_', '-') %>' do
+  describe 'GET /' do
+    subject { -> { get api_v1_<%= file_name.pluralize %>_path } }
+
+    let!(:<%= file_name %>) { create(:<%= file_name %>) }
+
+    it 'responds with 200 OK' do
+      subject.call
+      expect(last_response.status).to eq(200)
+    end
+
+    it 'responds with the <%= file_name.pluralize.humanize.downcase %>>' do
+      subject.call
+      expect(parsed_response).to match_array([
+        a_hash_including('id' => <%= file_name %>.id)
+      ])
+    end
+  end
+
+  describe 'GET /:id' do
+    subject { -> { get api_v1_<%= file_name %>_path(<%= file_name %>) } }
+
+    let!(:<%= file_name %>) { create(:<%= file_name %>) }
+
+    it 'responds with 200 OK' do
+      subject.call
+      expect(last_response.status).to eq(200)
+    end
+
+    it 'responds with the <%= file_name.humanize.downcase %>' do
+      subject.call
+      expect(parsed_response).to match(a_hash_including(
+        'id' => <%= file_name %>.id
+      ))
+    end
+  end
+
+  describe 'POST /' do
+    subject { -> { post api_v1_<%= file_name.pluralize %>_path, <%= file_name %>.to_json } }
+
+    let(:<%= file_name %>) { attributes_for(:<%= file_name %>) }
+
+    it 'responds with 201 Created' do
+      subject.call
+      expect(last_response.status).to eq(201)
+    end
+
+    it 'creates a new <%= file_name.humanize.downcase %>' do
+      expect(subject).to change(ProfileGroup, :count).by(1)
+    end
+
+    it 'responds with the new <%= file_name.humanize.downcase %>' do
+      subject.call
+      expect(parsed_response).to match(a_hash_including(<%= file_name %>))
+    end
+  end
+
+  describe 'PATCH /:id' do
+    subject do
+      proc do
+        patch api_v1_<%= file_name %>_path(<%= file_name %>), new_<%= file_name %>.to_json
+        <%= file_name %>.reload
+      end
+    end
+
+    let!(:<%= file_name %>) { create(:<%= file_name %>) }
+    let(:new_<%= file_name %>) { attributes_for(:<%= file_name %>) }
+
+    it 'responds with 200 OK' do
+      subject.call
+      expect(last_response.status).to eq(200)
+    end
+
+    it 'updates the <%= file_name.humanize.downcase %>' do
+      subject.call
+      expect(<%= file_name %>.as_json).to match(a_hash_including(new_<%= file_name %>.stringify_keys))
+    end
+
+    it 'responds with the updated <%= file_name.humanize.downcase %>' do
+      subject.call
+      expect(parsed_response).to match(a_hash_including(new_<%= file_name %>))
+    end
+  end
+
+  describe 'DELETE /:id' do
+    subject { -> { delete api_v1_<%= file_name %>_path(<%= file_name %>) } }
+
+    let!(:<%= file_name %>) { create(:<%= file_name %>) }
+
+    it 'deletes the <%= file_name.humanize.downcase %>' do
+      expect(subject).to change(ProfileGroup, :count).by(-1)
+    end
+
+    it 'responds with 204 No Content' do
+      subject.call
+      expect(last_response.status).to eq(204)
+    end
+  end
+end

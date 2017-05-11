@@ -7,6 +7,7 @@ module Pragma
     def copy_initializer_file
       copy_resource_files
       copy_controller
+      copy_spec
       generate_route
     end
 
@@ -18,6 +19,10 @@ module Pragma
 
     def copy_controller
       template 'resource/controller.rb', "app/controllers/api/v#{options['version']}/#{file_name.pluralize}_controller.rb"
+    end
+
+    def copy_spec
+      template 'resource/spec.rb', "spec/requests/api/v#{options['version']}/#{file_name.pluralize}_spec.rb"
     end
 
     def class_path
