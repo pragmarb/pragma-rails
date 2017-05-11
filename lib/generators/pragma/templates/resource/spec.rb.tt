@@ -51,7 +51,7 @@ RSpec.describe '/api/v1/<%= file_name.tr('_', '-') %>' do
 
     it 'responds with the new <%= file_name.humanize.downcase %>' do
       subject.call
-      expect(parsed_response).to match(a_hash_including(<%= file_name %>))
+      expect(parsed_response).to match(a_hash_including(<%= file_name %>.stringify_keys))
     end
   end
 
@@ -78,7 +78,7 @@ RSpec.describe '/api/v1/<%= file_name.tr('_', '-') %>' do
 
     it 'responds with the updated <%= file_name.humanize.downcase %>' do
       subject.call
-      expect(parsed_response).to match(a_hash_including(new_<%= file_name %>))
+      expect(parsed_response).to match(a_hash_including(new_<%= file_name %>.stringify_keys))
     end
   end
 
