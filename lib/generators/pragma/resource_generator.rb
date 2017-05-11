@@ -17,7 +17,7 @@ module Pragma
     end
 
     def copy_controller
-      copy_file 'resource/controller.rb', "app/controllers/api/v#{options['version']}/#{file_name.pluralize}_controller.rb"
+      template 'resource/controller.rb', "app/controllers/api/v#{options['version']}/#{file_name.pluralize}_controller.rb"
     end
 
     def class_path
