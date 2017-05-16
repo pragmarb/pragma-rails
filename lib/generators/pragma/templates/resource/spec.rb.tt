@@ -9,7 +9,7 @@ RSpec.describe '/api/v1/<%= file_name.pluralize.tr('_', '-') %>' do
       expect(last_response.status).to eq(200)
     end
 
-    it 'responds with the <%= file_name.pluralize.humanize.downcase %>>' do
+    it 'responds with the <%= file_name.pluralize.humanize.downcase %>' do
       subject.call
       expect(parsed_response).to match_array([
         a_hash_including('id' => <%= file_name %>.id)
