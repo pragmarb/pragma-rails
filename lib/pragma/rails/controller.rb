@@ -26,7 +26,8 @@ module Pragma
 
           if result.resource
             render status: result.status, json: result.resource.to_json(user_options: {
-              expand: params[:expand]
+              expand: params[:expand],
+              current_user: operation_user
             })
           else
             head result.status
