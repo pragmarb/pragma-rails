@@ -15,10 +15,18 @@ module Pragma
         #
         # @param operation_klass [Class|String] a subclass of +Pragma::Operation::Base+
         def run(operation_klass)
-          result = operation_klass.to_s.constantize.call(
-            params: operation_params.to_unsafe_h,
-            current_user: operation_user
-          )
+          begin
+            result = operation_klass.to_s.constantize.call!(
+              params: operation_params.to_unsafe_h,
+              current_user: operation_user
+            )
+          rescue Interactor::Failure => e
+            if e.context.pragma_operation_failure
+              result = e.context
+            else
+              raise e
+            end
+          end
 
           result.headers.each_pair do |key, value|
             response.headers[key] = value
