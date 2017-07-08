@@ -35,33 +35,50 @@ This gem provides a `pragma:resource` generator for creating a new resource with
 operations:
 
 ```console
-$ rails g pragma:resource article
-      create  app/resources/api/v1/article
-      create  app/resources/api/v1/article/contract/base.rb
-      create  app/resources/api/v1/article/contract/create.rb
-      create  app/resources/api/v1/article/contract/update.rb
-      create  app/resources/api/v1/article/decorator.rb
-      create  app/resources/api/v1/article/operation/create.rb
-      create  app/resources/api/v1/article/operation/destroy.rb
-      create  app/resources/api/v1/article/operation/index.rb
-      create  app/resources/api/v1/article/operation/update.rb
-      create  app/resources/api/v1/article/policy.rb
+$ rails g pragma:resource image
+      create  app/resources/api/v1/image
+      create  app/resources/api/v1/image/contract/base.rb
+      create  app/resources/api/v1/image/contract/create.rb
+      create  app/resources/api/v1/image/contract/update.rb
+      create  app/resources/api/v1/image/decorator.rb
+      create  app/resources/api/v1/image/operation/create.rb
+      create  app/resources/api/v1/image/operation/destroy.rb
+      create  app/resources/api/v1/image/operation/index.rb
+      create  app/resources/api/v1/image/operation/show.rb
+      create  app/resources/api/v1/image/operation/update.rb
+      create  app/resources/api/v1/image/policy.rb
+      create  app/controllers/api/v1/images_controller.rb
+      create  spec/requests/api/v1/images_spec.rb
+       route  namespace :api do
+    namespace :v1 do
+      resources :images, only: %i(index show create update destroy)
+    end
+  end
 ```
 
 You can also specify an API version (the default is 1):
 
 ```console
-$ rails g pragma:resource article -v 2
-      create  app/resources/api/v2/article
-      create  app/resources/api/v2/article/contract/base.rb
-      create  app/resources/api/v2/article/contract/create.rb
-      create  app/resources/api/v2/article/contract/update.rb
-      create  app/resources/api/v2/article/decorator.rb
-      create  app/resources/api/v2/article/operation/create.rb
-      create  app/resources/api/v2/article/operation/destroy.rb
-      create  app/resources/api/v2/article/operation/index.rb
-      create  app/resources/api/v2/article/operation/update.rb
-      create  app/resources/api/v2/article/policy.rb
+$ rails g pragma:resource image -v 2
+      create  app/resources/api/v2/image
+      create  app/resources/api/v2/image/contract/base.rb
+      create  app/resources/api/v2/image/contract/create.rb
+      create  app/resources/api/v2/image/contract/update.rb
+      create  app/resources/api/v2/image/decorator.rb
+      create  app/resources/api/v2/image/operation/create.rb
+      create  app/resources/api/v2/image/operation/destroy.rb
+      create  app/resources/api/v2/image/operation/index.rb
+      create  app/resources/api/v2/image/operation/show.rb
+      create  app/resources/api/v2/image/operation/update.rb
+      create  app/resources/api/v2/image/policy.rb
+      create  app/controllers/api/v2/images_controller.rb
+      create  spec/requests/api/v2/images_spec.rb
+       route  namespace :api do
+    namespace :v2 do
+      resources :images, only: %i(index show create update destroy)
+    end
+  end
+
 ```
 
 ### Controllers
