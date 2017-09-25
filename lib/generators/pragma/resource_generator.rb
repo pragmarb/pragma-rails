@@ -58,7 +58,7 @@ module Pragma
     end
 
     def write(str, indent)
-      route_string << "#{'  ' * indent}#{str}\n"
+      @route_string = route_string + "#{'  ' * indent}#{str}\n"
     end
 
     def route_length
