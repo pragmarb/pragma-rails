@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Pragma
   class ResourceGenerator < ::Rails::Generators::NamedBase
-    source_root File.expand_path("../templates", __FILE__)
+    source_root File.expand_path('../templates', __FILE__)
 
     class_option :version, type: :numeric, default: 1, desc: 'The API version to use', aliases: '-v'
 
