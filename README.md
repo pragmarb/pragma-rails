@@ -40,7 +40,8 @@ $ rails g pragma:resource image
       create  app/resources/api/v1/image/contract/base.rb
       create  app/resources/api/v1/image/contract/create.rb
       create  app/resources/api/v1/image/contract/update.rb
-      create  app/resources/api/v1/image/decorator.rb
+      create  app/resources/api/v1/image/decorator/instance.rb
+      create  app/resources/api/v1/image/decorator/collection.rb
       create  app/resources/api/v1/image/operation/create.rb
       create  app/resources/api/v1/image/operation/destroy.rb
       create  app/resources/api/v1/image/operation/index.rb
