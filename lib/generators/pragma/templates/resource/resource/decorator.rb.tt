@@ -1,8 +1,0 @@
-module API
-  module V<%= options['version'] %>
-    module <%= file_name.camelcase %>
-      class Decorator < Pragma::Decorator::Base
-      end
-    end
-  end
-end

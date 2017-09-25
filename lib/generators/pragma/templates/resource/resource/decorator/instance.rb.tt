@@ -1,0 +1,11 @@
+module API
+  module V<%= options['version'] %>
+    module <%= file_name.camelcase %>
+      module Decorator
+        class Instance < Pragma::Decorator::Base
+          feature Pragma::Decorator::Type
+        end
+      end
+    end
+  end
+end
