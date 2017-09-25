@@ -14,17 +14,17 @@ RSpec.describe '/api/v1/categories' do
 
     it 'returns the categories' do
       subject.call
-      expect(parsed_response).to match_array([
+      expect(parsed_response['data']).to match_array([
         a_hash_including('id' => category.id)
       ])
     end
 
-    it 'adds pagination info to the headers' do
+    it 'adds pagination info to the response' do
       subject.call
-      expect(last_response.headers).to match(a_hash_including(
-        'Total' => 1,
-        'Per-Page' => 30,
-        'Page' => 1
+      expect(parsed_response).to match(a_hash_including(
+        'total_entries' => 1,
+        'per_page' => 30,
+        'current_page' => 1
       ))
     end
 
@@ -37,17 +37,17 @@ RSpec.describe '/api/v1/categories' do
 
       it 'returns the articles from the given page' do
         subject.call
-        expect(parsed_response).to match_array([
+        expect(parsed_response['data']).to match_array([
           a_hash_including('id' => category2.id)
         ])
       end
 
-      it 'adds the expected pagination info to the headers' do
+      it 'adds the expected pagination info to the response' do
         subject.call
-        expect(last_response.headers).to match(a_hash_including(
-          'Total' => 2,
-          'Per-Page' => 1,
-          'Page' => 2
+        expect(parsed_response).to match(a_hash_including(
+          'total_entries' => 2,
+          'per_page' => 1,
+          'current_page' => 2
         ))
       end
     end
