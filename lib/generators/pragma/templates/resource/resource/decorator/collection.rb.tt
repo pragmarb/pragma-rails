@@ -6,6 +6,8 @@ module API
           feature Pragma::Decorator::Type
           feature Pragma::Decorator::Collection
           feature Pragma::Decorator::Pagination
+
+          decorate_with Instance
         end
       end
     end
