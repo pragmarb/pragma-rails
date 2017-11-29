@@ -15,8 +15,8 @@ RSpec.describe Pragma::Rails::Controller do
 
           def respond!(options, params:, **)
             options['result.response'] = Pragma::Operation::Response::Created.new(
-                headers: { 'X-Foo' => params[:foo] },
-                entity: { foo: params[:foo] }
+              headers: { 'X-Foo' => params[:foo] },
+              entity: { foo: params[:foo] }
             )
           end
         end
@@ -55,6 +55,6 @@ RSpec.describe Pragma::Rails::Controller do
   end
 
   it 'responds with the resource from the operation' do
-    expect(JSON.parse(subject.render_args.first[:json])).to eq('foo' => 'bar')
+    expect(subject.render_args.first[:json]).to eq('foo' => 'bar')
   end
 end

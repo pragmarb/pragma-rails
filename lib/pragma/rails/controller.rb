@@ -34,10 +34,7 @@ module Pragma
           if result['result.response'].entity
             render(
               status: result['result.response'].status,
-              json: result['result.response'].entity.to_json(user_options: {
-                expand: params[:expand],
-                current_user: operation_user
-              })
+              json: entity_to_hash(result['result.response'].entity).as_json
             )
           else
             head result['result.response'].status
@@ -62,6 +59,25 @@ module Pragma
         # @return [Object]
         def operation_user
           current_user if respond_to?(:current_user)
+        end
+
+        private
+
+        def entity_to_hash(entity)
+          options = {
+            user_options: {
+              expand: params[:expand],
+              current_user: operation_user
+            }
+          }
+
+          if entity.is_a?(Array)
+            entity.map { |e| entity_to_hash(e) }
+          elsif entity.respond_to?(:to_hash)
+            entity.method(:to_hash).arity == 0 ? entity.to_hash : entity.to_hash(options)
+          else
+            entity.as_json(options)
+          end
         end
       end
     end
