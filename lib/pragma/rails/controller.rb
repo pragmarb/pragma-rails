@@ -33,10 +33,7 @@ module Pragma
           end
 
           if result.resource
-            render status: result.status, json: result.resource.to_json(user_options: {
-              expand: params[:expand],
-              current_user: operation_user
-            })
+            render status: result.status, json: resource_to_json(result.resource)
           else
             head result.status
           end
@@ -60,6 +57,25 @@ module Pragma
         # @return [Object]
         def operation_user
           current_user if respond_to?(:current_user)
+        end
+
+        private
+
+        def resource_to_json(resource)
+          options = {
+            user_options: {
+              expand: params[:expand],
+              current_user: operation_user
+            }
+          }
+
+          if resource.is_a?(Array)
+            resource.map do |instance|
+              instance.to_hash(options)
+            end
+          else
+            resource.to_json(options)
+          end
         end
       end
     end
