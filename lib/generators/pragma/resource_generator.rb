@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Pragma
-  class ResourceGenerator < ::Rails::Generators::NamedBase
+  class ResourceGenerator < ::Rails::Generators::NamedBase # :nodoc:
     source_root File.expand_path('../templates', __FILE__)
 
     class_option :version, type: :numeric, default: 1, desc: 'The API version to use', aliases: '-v'
@@ -20,11 +20,17 @@ module Pragma
     end
 
     def copy_controller
-      template 'resource/controller.rb', "app/controllers/api/v#{options['version']}/#{file_name.pluralize}_controller.rb"
+      template(
+        'resource/controller.rb',
+        "app/controllers/api/v#{options['version']}/#{file_name.pluralize}_controller.rb"
+      )
     end
 
     def copy_spec
-      template 'resource/spec.rb', "spec/requests/api/v#{options['version']}/#{file_name.pluralize}_spec.rb"
+      template(
+        'resource/spec.rb',
+        "spec/requests/api/v#{options['version']}/#{file_name.pluralize}_spec.rb"
+      )
     end
 
     def class_path
@@ -41,7 +47,12 @@ module Pragma
         ", path: '#{file_name.pluralize.tr('_', '-')}'"
       end
 
-      write("resources :#{file_name.pluralize}, only: %i(index show create update destroy)#{path_fragment}", route_length + 1)
+      # rubocop:disable Metrics/LineLength
+      write(
+        "resources :#{file_name.pluralize}, only: %i(index show create update destroy)#{path_fragment}",
+        route_length + 1
+      )
+      # rubocop:enable Metrics/LineLength
 
       class_path.each_index do |index|
         write('end', route_length - index)

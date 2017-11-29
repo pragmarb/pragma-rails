@@ -74,7 +74,7 @@ module Pragma
           if entity.is_a?(Array)
             entity.map { |e| entity_to_hash(e) }
           elsif entity.respond_to?(:to_hash)
-            entity.method(:to_hash).arity == 0 ? entity.to_hash : entity.to_hash(options)
+            entity.method(:to_hash).zero? ? entity.to_hash : entity.to_hash(options)
           else
             entity.as_json(options)
           end
