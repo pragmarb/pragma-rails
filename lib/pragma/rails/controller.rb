@@ -33,7 +33,7 @@ module Pragma
           end
 
           if result.resource
-            render status: result.status, json: resource_to_json(result.resource)
+            render status: result.status, json: resource_to_json(result.resource).as_json
           else
             head result.status
           end
@@ -71,10 +71,10 @@ module Pragma
 
           if resource.is_a?(Array)
             resource.map do |instance|
-              instance.to_hash(options)
+              resource_to_json(instance)
             end
           else
-            resource.to_json(options)
+            resource.method(:to_hash).arity.zero? ? resource.to_hash : resource.to_hash(options)
           end
         end
       end
