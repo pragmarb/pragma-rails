@@ -16,4 +16,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 First Pragma 2 release.
 
 [Unreleased]: https://github.com/pragmarb/pragma-rails/compare/v2.0.0...HEAD
-[2.0.0]: https://github.com/pragmarb/pragma-rails/compare/v2.0.0...v1.2.4
+[2.0.0]: https://github.com/pragmarb/pragma-rails/compare/v1.2.4...v2.0.0
