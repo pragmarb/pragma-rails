@@ -74,7 +74,11 @@ module Pragma
               resource_to_json(instance)
             end
           else
-            resource.method(:to_hash).arity.zero? ? resource.to_hash : resource.to_hash(options)
+            if resource.respond_to?(:to_hash)
+              resource.method(:to_hash).arity.zero? ? resource.to_hash : resource.to_hash(options)
+            else
+              resource.as_json(options)
+            end
           end
         end
       end
