@@ -1,9 +1,9 @@
 # Pragma on Rails
 
-[![Build Status](https://img.shields.io/travis/pragmarb/pragma-rails.svg?maxAge=3600&style=flat-square)](https://travis-ci.org/pragmarb/pragma-rails)
-[![Dependency Status](https://img.shields.io/gemnasium/pragmarb/pragma-rails.svg?maxAge=3600&style=flat-square)](https://gemnasium.com/github.com/pragmarb/pragma-rails)
-[![Code Climate](https://img.shields.io/codeclimate/github/pragmarb/pragma-rails.svg?maxAge=3600&style=flat-square)](https://codeclimate.com/github/pragmarb/pragma-rails)
-[![Coveralls](https://img.shields.io/coveralls/pragmarb/pragma-rails.svg?maxAge=3600&style=flat-square)](https://coveralls.io/github/pragmarb/pragma-rails)
+[![Build Status](https://travis-ci.org/pragmarb/pragma-rails.svg?branch=master)](https://travis-ci.org/pragmarb/pragma-rails)
+[![Dependency Status](https://gemnasium.com/badges/github.com/pragmarb/pragma-rails.svg)](https://gemnasium.com/github.com/pragmarb/pragma-rails)
+[![Coverage Status](https://coveralls.io/repos/github/pragmarb/pragma-rails/badge.svg?branch=master)](https://coveralls.io/github/pragmarb/pragma-rails?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e51e8d7489eb72ab97ba/maintainability)](https://codeclimate.com/github/pragmarb/pragma-rails/maintainability)
 
 This gem provides Ruby on Rails integration for the [Pragma](https://github.com/pragmarb/pragma) architecture.
 
