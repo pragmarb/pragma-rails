@@ -3,9 +3,9 @@ module API
     module Article
       module Decorator
         class Instance < Pragma::Decorator::Base
-          feature Pragma::Decorator::Type
-          feature Pragma::Decorator::Association
-          feature Pragma::Decorator::Timestamp
+          include Pragma::Decorator::Type
+          include Pragma::Decorator::Association
+          include Pragma::Decorator::Timestamp
 
           property :id
           property :title

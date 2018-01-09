@@ -3,7 +3,7 @@ module API
     module <%= file_name.camelcase %>
       module Decorator
         class Instance < Pragma::Decorator::Base
-          feature Pragma::Decorator::Type
+          include Pragma::Decorator::Type
         end
       end
     end

@@ -3,7 +3,7 @@ module API
     module Category
       module Decorator
         class Instance < Pragma::Decorator::Base
-          feature Pragma::Decorator::Type
+          include Pragma::Decorator::Type
 
           property :id
           property :name

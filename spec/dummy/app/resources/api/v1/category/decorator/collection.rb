@@ -3,9 +3,9 @@ module API
     module Category
       module Decorator
         class Collection < Pragma::Decorator::Base
-          feature Pragma::Decorator::Type
-          feature Pragma::Decorator::Collection
-          feature Pragma::Decorator::Pagination
+          include Pragma::Decorator::Type
+          include Pragma::Decorator::Collection
+          include Pragma::Decorator::Pagination
 
           decorate_with Instance
         end
