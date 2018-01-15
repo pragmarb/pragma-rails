@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Implemented support for using the generators in mountable engines
+
 ### Changed
 
 - Replaced `feature` with `include` in generators and tests

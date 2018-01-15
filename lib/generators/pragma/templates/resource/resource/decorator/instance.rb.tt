@@ -1,3 +1,4 @@
+<% module_namespacing do -%>
 module API
   module V<%= options['version'] %>
     module <%= file_name.camelcase %>
@@ -9,3 +10,4 @@ module API
     end
   end
 end
+<% end -%>
