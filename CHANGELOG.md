@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.0]
+
 ### Added
 
 - Implemented support for using the generators in mountable engines
@@ -23,5 +25,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 First Pragma 2 release.
 
-[Unreleased]: https://github.com/pragmarb/pragma-rails/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/pragmarb/pragma-rails/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/pragmarb/pragma-rails/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/pragmarb/pragma-rails/compare/v1.2.4...v2.0.0
