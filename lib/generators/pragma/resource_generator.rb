@@ -16,30 +16,35 @@ module Pragma
     private
 
     def copy_resource_files
-      directory 'resource/resource', "app/resources/api/v#{options['version']}/#{file_name}"
+      directory(
+        'resource/resource',
+        "app/resources/#{namespaced_path}/api/v#{options['version']}/#{file_name}"
+      )
     end
 
     def copy_controller
+      # rubocop:disable Metrics/LineLength
       template(
         'resource/controller.rb',
-        "app/controllers/api/v#{options['version']}/#{file_name.pluralize}_controller.rb"
+        "app/controllers/#{namespaced_path}/api/v#{options['version']}/#{file_name.pluralize}_controller.rb"
       )
+      # rubocop:enable Metrics/LineLength
     end
 
     def copy_spec
       template(
         'resource/spec.rb',
-        "spec/requests/api/v#{options['version']}/#{file_name.pluralize}_spec.rb"
+        "spec/requests/#{namespaced_path}/api/v#{options['version']}/#{file_name.pluralize}_spec.rb"
       )
     end
 
-    def class_path
+    def route_path
       ['api', "v#{options['version']}"]
     end
 
     # Taken from https://github.com/rails/rails/blob/master/railties/lib/rails/generators/rails/resource_route/resource_route_generator.rb
     def generate_route
-      class_path.each_with_index do |namespace, index|
+      route_path.each_with_index do |namespace, index|
         write("namespace :#{namespace} do", index + 1)
       end
 
@@ -54,7 +59,7 @@ module Pragma
       )
       # rubocop:enable Metrics/LineLength
 
-      class_path.each_index do |index|
+      route_path.each_index do |index|
         write('end', route_length - index)
       end
 
@@ -73,7 +78,7 @@ module Pragma
     end
 
     def route_length
-      class_path.length
+      route_path.length
     end
   end
 end
