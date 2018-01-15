@@ -15,6 +15,10 @@ module Pragma
 
     private
 
+    def namespaced_path
+      namespaced? ? super : ''
+    end
+
     def copy_resource_files
       directory(
         'resource/resource',
