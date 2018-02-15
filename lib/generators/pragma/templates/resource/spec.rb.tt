@@ -2,7 +2,7 @@ RSpec.describe '/api/v1/<%= file_name.pluralize.tr('_', '-') %>' do
   describe 'GET /' do
     subject { -> { get api_v1_<%= file_name.pluralize %>_path } }
 
-    let!(:<%= file_name %>) { create(:<%= file_name %>) }
+    let!(:<%= file_name %>) { create(:<%= factory_name %>) }
 
     it 'responds with 200 OK' do
       subject.call
@@ -20,7 +20,7 @@ RSpec.describe '/api/v1/<%= file_name.pluralize.tr('_', '-') %>' do
   describe 'GET /:id' do
     subject { -> { get api_v1_<%= file_name %>_path(<%= file_name %>) } }
 
-    let!(:<%= file_name %>) { create(:<%= file_name %>) }
+    let!(:<%= file_name %>) { create(:<%= factory_name %>) }
 
     it 'responds with 200 OK' do
       subject.call
@@ -38,7 +38,7 @@ RSpec.describe '/api/v1/<%= file_name.pluralize.tr('_', '-') %>' do
   describe 'POST /' do
     subject { -> { post api_v1_<%= file_name.pluralize %>_path, <%= file_name %>.to_json } }
 
-    let(:<%= file_name %>) { attributes_for(:<%= file_name %>) }
+    let(:<%= file_name %>) { attributes_for(:<%= factory_name %>) }
 
     it 'responds with 201 Created' do
       subject.call
@@ -63,8 +63,8 @@ RSpec.describe '/api/v1/<%= file_name.pluralize.tr('_', '-') %>' do
       end
     end
 
-    let!(:<%= file_name %>) { create(:<%= file_name %>) }
-    let(:new_<%= file_name %>) { attributes_for(:<%= file_name %>) }
+    let!(:<%= file_name %>) { create(:<%= factory_name %>) }
+    let(:new_<%= file_name %>) { attributes_for(:<%= factory_name %>) }
 
     it 'responds with 200 OK' do
       subject.call
@@ -85,7 +85,7 @@ RSpec.describe '/api/v1/<%= file_name.pluralize.tr('_', '-') %>' do
   describe 'DELETE /:id' do
     subject { -> { delete api_v1_<%= file_name %>_path(<%= file_name %>) } }
 
-    let!(:<%= file_name %>) { create(:<%= file_name %>) }
+    let!(:<%= file_name %>) { create(:<%= factory_name %>) }
 
     it 'deletes the <%= file_name.humanize.downcase %>' do
       expect(subject).to change(<%= full_class_name %>, :count).by(-1)

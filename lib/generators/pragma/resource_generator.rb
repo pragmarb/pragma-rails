@@ -15,6 +15,10 @@ module Pragma
 
     private
 
+    def factory_name
+      [namespace, class_name].join.underscore.gsub('/', '_')
+    end
+
     def full_class_name
       [namespace, class_name].map(&:to_s).join('::')
     end
