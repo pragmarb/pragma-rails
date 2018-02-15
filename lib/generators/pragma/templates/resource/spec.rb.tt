@@ -46,7 +46,7 @@ RSpec.describe '/api/v1/<%= file_name.pluralize.tr('_', '-') %>' do
     end
 
     it 'creates a new <%= file_name.humanize.downcase %>' do
-      expect(subject).to change(<%= file_name.camelcase %>, :count).by(1)
+      expect(subject).to change(<%= full_class_name %>, :count).by(1)
     end
 
     it 'responds with the new <%= file_name.humanize.downcase %>' do
@@ -88,7 +88,7 @@ RSpec.describe '/api/v1/<%= file_name.pluralize.tr('_', '-') %>' do
     let!(:<%= file_name %>) { create(:<%= file_name %>) }
 
     it 'deletes the <%= file_name.humanize.downcase %>' do
-      expect(subject).to change(<%= file_name.camelcase %>, :count).by(-1)
+      expect(subject).to change(<%= full_class_name %>, :count).by(-1)
     end
 
     it 'responds with 204 No Content' do

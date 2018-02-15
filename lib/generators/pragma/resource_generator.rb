@@ -15,6 +15,10 @@ module Pragma
 
     private
 
+    def full_class_name
+      [namespace, class_name].map(&:to_s).join('::')
+    end
+
     def namespaced_path
       namespaced? ? super : ''
     end
