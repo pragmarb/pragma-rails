@@ -1,9 +1,9 @@
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 
-FactoryGirl.factories.clear
-FactoryGirl.definition_file_paths += [Rails.root.join('spec', 'factories').to_s]
-FactoryGirl.reload
+FactoryBot.factories.clear
+FactoryBot.definition_file_paths += [Rails.root.join('spec', 'factories').to_s]
+FactoryBot.reload
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 end

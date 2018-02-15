@@ -5,7 +5,7 @@ RSpec.describe '/api/v1/categories' do
     subject { -> { get api_v1_categories_path(params) } }
 
     let(:params) { {} }
-    let!(:category) { FactoryGirl.create(:category) }
+    let!(:category) { FactoryBot.create(:category) }
 
     it 'responds with 200 OK' do
       subject.call
@@ -33,7 +33,7 @@ RSpec.describe '/api/v1/categories' do
         { page: 2, per_page: 1 }
       end
 
-      let!(:category2) { FactoryGirl.create(:category) }
+      let!(:category2) { FactoryBot.create(:category) }
 
       it 'returns the articles from the given page' do
         subject.call
@@ -89,7 +89,7 @@ RSpec.describe '/api/v1/categories' do
   describe 'GET /:id' do
     subject { -> { get api_v1_category_path(category, params) } }
 
-    let(:category) { FactoryGirl.create(:category) }
+    let(:category) { FactoryBot.create(:category) }
     let(:params) { {} }
 
     it 'responds with 200 OK' do

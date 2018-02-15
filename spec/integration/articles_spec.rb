@@ -5,7 +5,7 @@ RSpec.describe '/api/v1/articles' do
     subject { -> { get api_v1_articles_path(params) } }
 
     let(:params) { {} }
-    let!(:article) { FactoryGirl.create(:article) }
+    let!(:article) { FactoryBot.create(:article) }
 
     it 'responds with 200 OK' do
       subject.call
@@ -48,7 +48,7 @@ RSpec.describe '/api/v1/articles' do
         { page: 2, per_page: 1 }
       end
 
-      let!(:article2) { FactoryGirl.create(:article) }
+      let!(:article2) { FactoryBot.create(:article) }
 
       it 'returns the articles from the given page' do
         subject.call
@@ -104,7 +104,7 @@ RSpec.describe '/api/v1/articles' do
   describe 'GET /:id' do
     subject { -> { get api_v1_article_path(article, params) } }
 
-    let(:article) { FactoryGirl.create(:article) }
+    let(:article) { FactoryBot.create(:article) }
     let(:params) { { expand: ['category'] } }
 
     it 'responds with 200 OK' do
@@ -160,8 +160,8 @@ RSpec.describe '/api/v1/articles' do
     subject { -> { post api_v1_articles_path(params), article.to_json } }
 
     let(:article) do
-      FactoryGirl.attributes_for(:article).tap do |a|
-        a[:category] = FactoryGirl.create(:category).id
+      FactoryBot.attributes_for(:article).tap do |a|
+        a[:category] = FactoryBot.create(:category).id
       end
     end
 
@@ -211,7 +211,7 @@ RSpec.describe '/api/v1/articles' do
   describe 'PATCH /:id' do
     subject { -> { patch api_v1_article_path(article, params), new_article.to_json } }
 
-    let(:article) { FactoryGirl.create(:article) }
+    let(:article) { FactoryBot.create(:article) }
     let(:params) { {} }
 
     let(:new_article) do
@@ -264,7 +264,7 @@ RSpec.describe '/api/v1/articles' do
   describe 'DELETE /:id' do
     subject { -> { delete api_v1_article_path(article) } }
 
-    let!(:article) { FactoryGirl.create(:article) }
+    let!(:article) { FactoryBot.create(:article) }
 
     it 'responds with 204 No Content' do
       subject.call
