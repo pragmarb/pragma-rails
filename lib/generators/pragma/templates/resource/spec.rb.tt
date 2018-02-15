@@ -11,7 +11,7 @@ RSpec.describe '/api/v1/<%= file_name.pluralize.tr('_', '-') %>' do
 
     it 'responds with the <%= file_name.pluralize.humanize.downcase %>' do
       subject.call
-      expect(parsed_response).to match_array([
+      expect(parsed_response['data']).to match_array([
         a_hash_including('id' => <%= file_name %>.id)
       ])
     end
