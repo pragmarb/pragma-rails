@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Fixed
+
+- Allow params to be accessed by string or symbol
+
 ## [2.1.1]
 
 ### Fixed

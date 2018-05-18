@@ -49,7 +49,7 @@ module Pragma
         #
         # @return [Hash]
         def operation_params
-          params.to_unsafe_h
+          params.to_unsafe_h.with_indifferent_access
         end
 
         # Returns the currently authenticated user (for policies).
