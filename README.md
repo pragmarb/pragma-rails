@@ -1,7 +1,6 @@
 # Pragma on Rails
 
 [![Build Status](https://travis-ci.org/pragmarb/pragma-rails.svg?branch=master)](https://travis-ci.org/pragmarb/pragma-rails)
-[![Dependency Status](https://gemnasium.com/badges/github.com/pragmarb/pragma-rails.svg)](https://gemnasium.com/github.com/pragmarb/pragma-rails)
 [![Coverage Status](https://coveralls.io/repos/github/pragmarb/pragma-rails/badge.svg?branch=master)](https://coveralls.io/github/pragmarb/pragma-rails?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e51e8d7489eb72ab97ba/maintainability)](https://codeclimate.com/github/pragmarb/pragma-rails/maintainability)
 
