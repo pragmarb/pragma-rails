@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Added
+
+- Add support for passing additional context to policies via `#policy_context`
+
 ## Fixed
 
 - Allow params to be accessed by string or symbol
