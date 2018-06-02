@@ -6,6 +6,4 @@ rvm:
   - 2.5.0
 before_install: gem install bundler -v 1.13.3
 script:
-  - bundle exec rake db:schema:load
-  - bundle exec rake db:test:prepare
-  - bundle exec rake spec
+  - cd spec/dummy/ && bundle exec rake db:schema:load && bundle exec rake db:test:prepare && bundle exec rake spec
