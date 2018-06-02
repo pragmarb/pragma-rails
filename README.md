@@ -131,6 +131,9 @@ module API
 end
 ```
 
+You may also define `#policy_context` to [pass additional context](https://github.com/pragmarb/pragma-policy#passing-additional-context) 
+to your policies.
+
 ### Resource Controllers
 
 Resource controllers (provided by the `Pragma::Rails::ResourceController` module) abstract even more 

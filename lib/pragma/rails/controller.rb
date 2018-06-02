@@ -24,7 +24,8 @@ module Pragma
 
           result = operation_const.call(
             operation_params,
-            'current_user' => operation_user
+            'current_user' => operation_user,
+            'policy.context' => policy_context,
           )
 
           result['result.response'].headers.each_pair do |key, value|
@@ -59,6 +60,15 @@ module Pragma
         # @return [Object]
         def operation_user
           current_user if respond_to?(:current_user)
+        end
+
+        # Returns the context to pass to Pragma policies.
+        #
+        # By default, calls {#operation_user}.
+        #
+        # @return [Object]
+        def policy_context
+          operation_user
         end
 
         private
