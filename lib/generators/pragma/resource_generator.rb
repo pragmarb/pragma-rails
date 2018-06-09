@@ -2,7 +2,7 @@
 
 module Pragma
   class ResourceGenerator < ::Rails::Generators::NamedBase # :nodoc:
-    source_root File.expand_path('../templates', __FILE__)
+    source_root File.expand_path('templates', __dir__)
 
     class_option :version, type: :numeric, default: 1, desc: 'The API version to use', aliases: '-v'
 
@@ -16,7 +16,7 @@ module Pragma
     private
 
     def factory_name
-      [namespace, class_name].join.underscore.gsub('/', '_')
+      [namespace, class_name].join.underscore.tr('/', '_')
     end
 
     def full_class_name
@@ -60,9 +60,7 @@ module Pragma
         write("namespace :#{namespace} do", index + 1)
       end
 
-      path_fragment = if file_name.include?('_')
-        ", path: '#{file_name.pluralize.tr('_', '-')}'"
-      end
+      path_fragment = (", path: '#{file_name.pluralize.tr('_', '-')}'" if file_name.include?('_'))
 
       # rubocop:disable Metrics/LineLength
       write(

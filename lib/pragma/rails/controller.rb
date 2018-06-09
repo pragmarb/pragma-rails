@@ -25,7 +25,7 @@ module Pragma
           result = operation_const.call(
             operation_params,
             'current_user' => operation_user,
-            'policy.context' => policy_context,
+            'policy.context' => policy_context
           )
 
           result['result.response'].headers.each_pair do |key, value|
