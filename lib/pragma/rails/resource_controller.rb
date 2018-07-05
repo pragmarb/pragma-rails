@@ -3,8 +3,6 @@
 module Pragma
   module Rails
     # Exposes CRUD operations on a resource through a Rails controller.
-    #
-    # @author Alessandro Desantis
     module ResourceController
       def self.included(klass)
         klass.include Controller

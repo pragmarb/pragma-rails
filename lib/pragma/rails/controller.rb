@@ -4,8 +4,6 @@ module Pragma
   module Rails
     # This mixin should be included in a Rails controller to provide integration with Pragma
     # operations.
-    #
-    # @author Alessandro Desantis
     module Controller
       def self.included(klass)
         klass.include InstanceMethods
@@ -27,6 +25,8 @@ module Pragma
             'current_user' => operation_user,
             'policy.context' => policy_context
           )
+
+          fail NoResponseError unless result['result.response']
 
           result['result.response'].headers.each_pair do |key, value|
             response.headers[key] = value
