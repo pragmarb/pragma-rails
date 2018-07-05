@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Started raising a `NoResponseError` if an operation doesn't return a `result.response` skill 
+
 ## [2.2.0]
 
 ## Added
