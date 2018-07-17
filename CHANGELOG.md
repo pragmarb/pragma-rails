@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Started raising a `NoResponseError` if an operation doesn't return a `result.response` skill 
+- `rack.request` is now passed to operations
 
 ## [2.2.0]
 

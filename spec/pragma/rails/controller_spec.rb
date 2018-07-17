@@ -29,6 +29,10 @@ RSpec.describe Pragma::Rails::Controller do
           @response ||= OpenStruct.new(headers: {})
         end
 
+        def request
+          @request ||= OpenStruct.new(env: {})
+        end
+
         def render(*args)
           @render_args = args
         end
@@ -74,6 +78,10 @@ RSpec.describe Pragma::Rails::Controller do
 
         def operation_params
           ActionController::Parameters.new(foo: 'bar')
+        end
+
+        def request
+          @request ||= OpenStruct.new(env: {})
         end
       end.tap do |klass|
         klass.include described_class
