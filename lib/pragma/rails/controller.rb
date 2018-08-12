@@ -24,7 +24,7 @@ module Pragma
             operation_params,
             'current_user' => operation_user,
             'policy.context' => policy_context,
-            'rack.request' => Rack::Request.new(request.env),
+            'rack.request' => Rack::Request.new(request.env)
           )
 
           fail NoResponseError unless result['result.response']

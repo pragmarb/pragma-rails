@@ -1,7 +1,7 @@
 require: rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
   Include:
     - '**/*.rb'
     - '**/Rakefile'
@@ -18,7 +18,7 @@ AllCops:
 
 RSpec/DescribeClass:
   Exclude:
-    - 'spec/requests/**/*'
+  - 'spec/integration/**/*'
 
 Style/BlockDelimiters:
   Exclude:
@@ -98,7 +98,3 @@ RSpec/MessageExpectation:
 
 RSpec/MessageSpies:
   Enabled: false
-
-RSpec/DescribeClass:
-  Exclude:
-    - 'spec/integration/**/*'

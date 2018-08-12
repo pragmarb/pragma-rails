@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Pragma
   module Rails
+    # Raised when an operation doesn't set a +result.response+ skill.
     class NoResponseError < StandardError
       def initialize
         super <<~MESSAGE
